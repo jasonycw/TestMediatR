@@ -1,7 +1,7 @@
-﻿using MediatR;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace TestMediatR.Features
 {
@@ -11,7 +11,7 @@ namespace TestMediatR.Features
         public TestGenericRequest(T value) => Value = value;
     }
 
-    public class TestGenericHandler<T> : IRequestHandler<TestGenericRequest<T>, string>
+    public class TestGenericRequestHandler<T> : IRequestHandler<TestGenericRequest<T>, string>
     {
         public async Task<string> Handle(TestGenericRequest<T> request, CancellationToken cancellationToken)
         {
