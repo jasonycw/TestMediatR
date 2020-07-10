@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TestMediatR.Features;
 
 namespace TestMediatR
 {
@@ -16,6 +17,9 @@ namespace TestMediatR
         {
             services
                 .AddMediatR(typeof(Startup))
+                // MediatR do not pick up partially closed generic IRequest type, so need to add DI mapping.
+                // Ref: https://github.com/jbogard/MediatR/issues/534
+                .AddTransient<IRequestHandler<TestGenericRequest<int>, string>, TestGenericRequestHandler<int>>()
                 .AddControllers();
         }
 
